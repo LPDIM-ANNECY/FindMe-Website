@@ -1,0 +1,15 @@
+.wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.auth {
+    transition: all .3s;
+    margin-top: 120px;
+
+    @media screen and (min-width: $col-lg) {
+        margin-top: 230px;
+    }
+
+}
