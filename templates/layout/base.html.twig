@@ -19,6 +19,15 @@
         {% block javascripts %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+
+        <nav></nav>
+
+        <div class="content position-relative">
+            {% block body %}{% endblock %}
+        </div>
+
+        {% if footer is not defined or footer != false %}
+            {% include 'layout/footer.html.twig' %}
+        {% endif %}
     </body>
 </html>

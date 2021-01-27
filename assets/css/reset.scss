@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
     font-size: 16px;
+    outline: none;
 }
 
 html, body {
@@ -8,8 +9,18 @@ html, body {
     word-break: break-word;
 }
 
-* {
-    outline: none;
+body {
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+.content {
+    flex-grow:1;
+}
+
+footer {
+    overflow: hidden;
 }
 
 input[type=text] {
