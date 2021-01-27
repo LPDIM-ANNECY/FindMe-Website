@@ -91,6 +91,13 @@ class User implements UserInterface
         return $this->create_at;
     }
 
+    public function setCreateAt(?DateTime $dateTime = null): self
+    {
+        $this->create_at = $dateTime ?? new DateTime();
+
+        return $this;
+    }
+
     /**
      * @see UserInterface
      */
