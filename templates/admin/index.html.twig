@@ -1,0 +1,20 @@
+{% set title = "Admin" %}
+
+{% extends 'layout/base.html.twig' %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <div class="actions">
+            <div onclick="location='{{ path("home") }}'">
+                <i class="las la-5x la-user-edit"></i>
+                Gestion des abonnements
+            </div>
+            <div>
+                <i class="las la-5x la-chart-bar"></i>
+                <p>Statistiques</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

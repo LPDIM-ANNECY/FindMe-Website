@@ -390,3 +390,27 @@
 .ps-5 {
     padding-left: 3rem !important;
 }
+
+.container {
+    @include margin-x(10px);
+
+    @include media('>phone') {
+        @include margin-x(50px);
+    }
+
+    @include media('>tablet') {
+        @include margin-x(70px);
+    }
+
+    @include media('>sm-desktop') {
+        @include margin-x(90px);
+    }
+
+    @include media('>md-desktop') {
+        @include margin-x(120px);
+    }
+
+    @include media('>lg-desktop') {
+        @include margin-x(270px);
+    }
+}

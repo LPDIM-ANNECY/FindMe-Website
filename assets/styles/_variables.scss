@@ -1,0 +1,30 @@
+/** COLORS **/
+$white: #FFFFFF;
+$green: #689F38;
+$text-muted: #6c757d;
+
+$col-lg: 992px;
+
+$h1-size: 45px;
+
+$input-height: 40px;
+$input-background: #f7fafb;
+$border-radius-size: 5px;
+
+
+// layout
+//$layout-sm: 576px;
+//$layout-md: 768px;
+//$layout-lg: 992px;
+//$layout-xl: 1200px;
+//$layout-xxl: 1400px;
+
+$layouts: ("layout-sm": 576px, "layout-md": 768px,"layout-lg": 992px,"layout-xl": 1200px,"layout-xxl": 1400px);
+
+//@each $key,$value in $layouts {
+//    @mixin #{key} {
+//        @media (min-width: #{$value}) {
+//            @content;
+//        }
+//    }
+//}

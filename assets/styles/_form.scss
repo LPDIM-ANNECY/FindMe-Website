@@ -16,7 +16,7 @@ form {
 }
 
 .auth-form {
-    border-radius: 5px;
+    border-radius: $border-radius-size;
     background-color: #FFFFFF;
     width: 350px;
     max-width: 100%;
@@ -31,6 +31,6 @@ form {
         height: $input-height;
         background-color: $input-background;
         border: #CCCCCC solid 1px;
-        border-radius: 3px;
+        border-radius: $border-radius-size;
     }
 }

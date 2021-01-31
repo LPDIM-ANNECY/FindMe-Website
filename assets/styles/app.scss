@@ -1,7 +1,10 @@
-@import url('https://rsms.me/inter/inter.css');
-
 @import "variables";
+@import "mixins/media";
+@import "mixins/spacing";
+@import "functions";
 @import "reset";
+@import "fonts/Inter";
+@import "fonts/line-awesome";
 @import "utils";
 @import "spacing";
 @import "animations";
@@ -11,3 +14,4 @@
 
 /** specific **/
 @import "auth";
+@import "admin";
