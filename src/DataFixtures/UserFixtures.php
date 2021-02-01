@@ -30,6 +30,7 @@ class UserFixtures extends Fixture
         $user->setPassword($this->encoder->encodePassword($user, 'test200'));
         $user->setCreateAt();
         $user->setRoles(['ROLE_ADMIN']);
+        $user->setLocale('fr');
         $manager->persist($user);
         $manager->flush();
     }
