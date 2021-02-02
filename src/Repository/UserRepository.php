@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
@@ -34,6 +35,22 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setPassword($newEncodedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
+    }
+
+
+    public function getAllCustomer()
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->select('u.id,u.email,u.company_name,u.create_at,u.roles,u.locale');
+
+        // work only pgAdmin
+        //$qb->where("u.roles::jsonb ? 'ROLE_CUSTOMER'");
+
+        $users = $qb->getQuery()->getResult(AbstractQuery::HYDRATE_ARRAY);
+
+        return array_filter($users, function ($v) {
+            return in_array("ROLE_CUSTOMER", $v['roles']);
+        });
     }
 
     // /**

@@ -1,0 +1,37 @@
+{% set title = "Gestion des abonnements" %}
+
+{% extends 'layout/base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="mx-auto">
+            <h1>Clients :</h1>
+            <table>
+                <thead>
+                <tr>
+                    {% for key in customers | first | keys %}
+                        <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for customer in customers %}
+                    <tr>
+                        {% for key, value in customer %}
+                            {% if value.timestamp is defined %}
+                                <td>{{ value | date('d-m-Y') }}</td>
+                            {% elseif key == 'roles' %}
+                                <td>{{ value | join(';') }}</td>
+                            {% else %}
+                                <td>{{ value }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+{% endblock %}

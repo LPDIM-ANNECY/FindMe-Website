@@ -23,15 +23,41 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $user = new User();
+        $admin = new User();
 
-        $user->setEmail('me@test200.fr');
-        $user->setCompanyName('Test200');
-        $user->setPassword($this->encoder->encodePassword($user, 'test200'));
-        $user->setCreateAt();
-        $user->setRoles(['ROLE_ADMIN']);
-        $user->setLocale('fr');
-        $manager->persist($user);
+        /**
+         * ADMIN
+         */
+        $admin->setEmail('me@test200.fr');
+        $admin->setCompanyName('Test200');
+        $admin->setPassword($this->encoder->encodePassword($admin, 'test200'));
+        $admin->setCreateAt();
+        $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setLocale('fr');
+
+        /**
+         * CUSTOMERS
+         */
+        $annecy = new User();
+        $annecy->setEmail('annecy@annecy.fr');
+        $annecy->setCompanyName("Office de Tourisme du Lac d'Annecy");
+        $annecy->setPassword($this->encoder->encodePassword($annecy, 'annecy'));
+        $annecy->setCreateAt();
+        $annecy->setRoles(['ROLE_CUSTOMER']);
+        $annecy->setLocale('fr');
+
+        $chambery = new User();
+        $chambery->setEmail('chambery@annecy.fr');
+        $chambery->setCompanyName("Grand Chambéry Alpes Tourisme");
+        $chambery->setPassword($this->encoder->encodePassword($chambery, 'chambery'));
+        $chambery->setCreateAt();
+        $chambery->setRoles(['ROLE_CUSTOMER']);
+        $chambery->setLocale('fr');
+
+
+        $manager->persist($admin);
+        $manager->persist($annecy);
+        $manager->persist($chambery);
         $manager->flush();
     }
 }
