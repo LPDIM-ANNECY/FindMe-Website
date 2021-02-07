@@ -51,7 +51,7 @@ class UserFixtures extends Fixture
         $chambery->setCompanyName("Grand Chambéry Alpes Tourisme");
         $chambery->setPassword($this->encoder->encodePassword($chambery, 'chambery'));
         $chambery->setCreateAt();
-        $chambery->setRoles(['ROLE_CUSTOMER']);
+        $chambery->setRoles(['ROLE_CUSTOMER', 'ROLE_TEST']);
         $chambery->setLocale('fr');
 
 

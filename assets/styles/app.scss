@@ -1,6 +1,7 @@
-@import "variables";
 @import "mixins/media";
+@import "mixins/theme";
 @import "mixins/spacing";
+@import "variables";
 @import "functions";
 @import "reset";
 @import "fonts/Inter";
@@ -12,7 +13,8 @@
 @import "form";
 @import "wave";
 @import "override";
-
+@import "flag";
+@import "loaders";
 /** specific **/
-@import "auth";
-@import "admin";
+@import "specifics/auth";
+@import "specifics/admin";

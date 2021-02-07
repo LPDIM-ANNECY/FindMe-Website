@@ -29,5 +29,7 @@
         {% if footer is not defined or footer != false %}
             {% include 'layout/footer.html.twig' %}
         {% endif %}
+
+        {% block javascriptsCustom %}{% endblock %}
     </body>
 </html>

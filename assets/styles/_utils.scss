@@ -6,10 +6,6 @@
     color: $white;
 }
 
-h1 {
-    font-size: $h1-size;
-}
-
 .wave-green {
     fill: #689F38;
 }
@@ -24,4 +20,34 @@ h1 {
 
 .position-relative {
     position: relative;
+}
+
+.overflow-x-scroll {
+    overflow-x: auto;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.d-none {
+    display: none!important;
+}
+
+.d-flex {
+    display: flex!important;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.bg-danger {
+    padding: 10px 20px;
+    background-color: $error;
+    color: $white;
+}
+
+.text-error {
+    color: $error;
 }

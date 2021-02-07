@@ -22,11 +22,13 @@ class User implements UserInterface
     private int $id;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=180, unique=true, nullable=true)
      */
     private ?string $email;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=180, nullable=true)
      */
     private ?string $company_name;
@@ -62,7 +64,7 @@ class User implements UserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -84,7 +86,7 @@ class User implements UserInterface
         return $this->company_name;
     }
 
-    public function setCompanyName($company_name): self
+    public function setCompanyName(?string $company_name): self
     {
         $this->company_name = $company_name;
 
@@ -130,7 +132,7 @@ class User implements UserInterface
         return (string) $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
 
