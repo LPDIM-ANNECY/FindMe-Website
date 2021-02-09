@@ -19,6 +19,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LoginAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
@@ -30,13 +31,15 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
     private UrlGeneratorInterface $urlGenerator;
     private CsrfTokenManagerInterface $csrfTokenManager;
     private UserPasswordEncoderInterface $passwordEncoder;
+    private TranslatorInterface $translator;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(TranslatorInterface $translator, EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->translator = $translator;
     }
 
     public function supports(Request $request): bool
@@ -48,9 +51,10 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
     public function getCredentials(Request $request): array
     {
         $credentials = [
-            'email' => $request->request->get('email'),
-            'password' => $request->request->get('password'),
+            'email' => $request->get('user')['email'],
+            'password' => $request->request->get('user')['password'],
             'csrf_token' => $request->request->get('_csrf_token'),
+            '_locale' => $request->getSession()->get('_locale')
         ];
         $request->getSession()->set(
             Security::LAST_USERNAME,
@@ -71,7 +75,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException($this->translator->trans('Invalid credentials.', [], 'security'));
         }
 
         return $user;
@@ -96,8 +100,10 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
             return new RedirectResponse($targetPath);
         }
 
+        $request->setLocale($this->getCredentials($request)['_locale']);
+
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        return new RedirectResponse($this->urlGenerator->generate('home'));
+        return new RedirectResponse($this->urlGenerator->generate('home', ['_locale' => $request->getLocale()]));
     }
 
     protected function getLoginUrl(): ?string

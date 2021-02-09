@@ -1,0 +1,30 @@
+.choose-languages {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    grid-auto-rows: minmax(200px, auto);
+    gap: 10px;
+    max-width: 100%;
+    width: 520px; // 250px * nb card + gap * nb carb
+
+    > choose-language, > div {
+        width: 250px;
+        max-width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: $border-radius-size;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+        .go {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+    }
+}

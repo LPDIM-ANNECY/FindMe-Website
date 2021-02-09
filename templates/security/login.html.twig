@@ -5,35 +5,63 @@
     <img class="wave" src="/img/wave.svg"/>
 
     <div class="auth animate animateSlideInDown mx-1">
-        <h1 class="text-center text-white mb-3">Se connecter</h1>
-        <form class="auth-form py-2 px-3" method="post">
-            {% if error %}
-                <div class="text-center bg-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-            <div class="form-group my-3">
-                <label for="email" class="mb-2">Email</label>
-                <input id="email" class="form-control px-2" type="text" name="email" value="{{ last_username }}"
-                       required autofocus>
-            </div>
-            <div class="form-group my-3">
-                <label for="password" class="mb-2">Mot de passe</label>
-                <input id="password" class="form-control px-2" type="password" name="password" required>
-            </div>
+        <h1 class="text-center text-white mb-3">{{ 'connection_title' | trans }}</h1>
+        {{ form_start(form, {'attr': {'class': 'auth-form py-2 px-3'}}) }}
+        {% if error %}
+            <div class="text-center bg-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-            <div class="checkbox-inline">
-                <input id="remember" type="checkbox"><label for="remember">Se souvenir de moi</label>
-            </div>
+        <div class="form-group my-3">
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email, {attr : {'class' : 'form-control px-2'}}) }}
+        </div>
 
-            <div class="legal-mention text-muted my-3">
-                <p class="italic"><small>Vos données personnelles ne sont utilisées qu'à des fins d'authentification et
-                        ne sont pas partagées avec des tiers.</small></p>
-            </div>
+        <div class="form-group my-3">
+            {{ form_label(form.password) }}
+            {{ form_widget(form.password, {attr : {'class' : 'form-control px-2', 'name': 'password'}}) }}
+        </div>
 
-            <div class="form-group my-3">
-                <input class="btn" type="submit" value="Se connecter">
-            </div>
-        </form>
+        <div class="checkbox-inline">
+            <input id="remember" type="checkbox"><label for="remember">{{ 'remember_me' | trans }}</label>
+        </div>
+
+        <div class="legal-mention text-muted my-3">
+            <p class="italic"><small>{{ 'legal_mention_connection' | trans }}</small></p>
+        </div>
+
+        <div class="form-group my-3">
+            <input class="btn" type="submit" value="{{ 'connection_title' | trans }}">
+        </div>
+        {{ form_end(form, {'render_rest': false}) }}
+{#        <form class="auth-form py-2 px-3" method="post">#}
+{#            {% if error %}#}
+{#                <div class="text-center bg-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>#}
+{#            {% endif %}#}
+{#            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">#}
+{#            <div class="form-group my-3">#}
+{#                <label for="email" class="mb-2">Email</label>#}
+{#                <input id="email" class="form-control px-2" type="text" name="email" value="{{ last_username }}"#}
+{#                       required autofocus>#}
+{#            </div>#}
+{#            <div class="form-group my-3">#}
+{#                <label for="password" class="mb-2">Mot de passe</label>#}
+{#                <input id="password" class="form-control px-2" type="password" name="password" required>#}
+{#            </div>#}
+
+{#            <div class="checkbox-inline">#}
+{#                <input id="remember" type="checkbox"><label for="remember">Se souvenir de moi</label>#}
+{#            </div>#}
+
+{#            <div class="legal-mention text-muted my-3">#}
+{#                <p class="italic"><small>Vos données personnelles ne sont utilisées qu'à des fins d'authentification et#}
+{#                        ne sont pas partagées avec des tiers.</small></p>#}
+{#            </div>#}
+
+{#            <div class="form-group my-3">#}
+{#                <input class="btn" type="submit" value="Se connecter">#}
+{#            </div>#}
+{#        </form>#}
     </div>
 
 

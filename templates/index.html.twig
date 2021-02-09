@@ -1,0 +1,17 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block javascripts %}
+    <script src="/assets/scripts/WelcomePage.js" type="module" defer></script>
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <h1 class="text-center">Welcome on the management patrimony !</h1>
+
+        <h3 class="text-center mt-5">Please, choose your language</h3>
+        <div class="choose-languages mx-auto mt-4">
+            <choose-language code="en" name="English" route="{{ path('home', {'_locale': 'en'}) }}"></choose-language>
+            <choose-language code="fr" name="Français" route="{{ path('home', {'_locale': 'fr'}) }}"></choose-language>
+        </div>
+    </div>
+
+{% endblock %}
