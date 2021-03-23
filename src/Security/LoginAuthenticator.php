@@ -53,8 +53,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
         $credentials = [
             'email' => $request->get('user')['email'],
             'password' => $request->request->get('user')['password'],
-            'csrf_token' => $request->request->get('_csrf_token'),
-            '_locale' => $request->getSession()->get('_locale')
+            'csrf_token' => $request->request->get('_csrf_token')
         ];
         $request->getSession()->set(
             Security::LAST_USERNAME,
@@ -100,10 +99,8 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
             return new RedirectResponse($targetPath);
         }
 
-        $request->setLocale($this->getCredentials($request)['_locale']);
-
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        return new RedirectResponse($this->urlGenerator->generate('home', ['_locale' => $request->getLocale()]));
+        return new RedirectResponse($this->urlGenerator->generate('home'));
     }
 
     protected function getLoginUrl(): ?string
