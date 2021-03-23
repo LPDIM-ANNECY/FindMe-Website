@@ -5,7 +5,7 @@
     <img class="wave" src="/img/wave.svg"/>
 
     <div class="auth animate animateSlideInDown mx-1">
-        <h1 class="text-center text-white mb-3">{{ 'connection_title' | trans }}</h1>
+        <h1 class="text-center text-white mb-3">Connexion</h1>
         {{ form_start(form, {'attr': {'class': 'auth-form py-2 px-3'}}) }}
         {% if error %}
             <div class="text-center bg-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
