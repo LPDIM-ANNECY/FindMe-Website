@@ -1,0 +1,17 @@
+<div id="nav">
+    <div id="navTitleContainer">
+        <div id="navTitle">
+            <h1>{{ app_name }}</h1>
+        </div>
+    </div>
+    <ul id="navLink">
+        {% if not app.user %}
+            <li class="link"><a href="{{ path('app_login') }}">Connexion</a></li>
+        {% else %}
+            <li class="link"><a href="">Place</a></li>
+            <li class="link"><a href="">Itinéraire</a></li>
+            <li class="link"><a href="">User</a></li>
+            <li class="link"><a href="">Déconnexion</a></li>
+        {% endif %}
+    </ul>
+</div>

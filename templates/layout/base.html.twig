@@ -28,6 +28,11 @@
         {% block javascripts %}{% endblock %}
     </head>
     <body>
+
+        {% if nav is not defined or nav != false %}
+            {% include 'layout/nav.html.twig' %}
+        {% endif %}
+
         <div class="content position-relative">
             {% block body %}{% endblock %}
         </div>
