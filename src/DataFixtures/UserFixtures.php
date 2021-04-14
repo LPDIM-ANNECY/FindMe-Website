@@ -33,7 +33,6 @@ class UserFixtures extends Fixture
         $admin->setPassword($this->encoder->encodePassword($admin, 'test200'));
         $admin->setCreateAt();
         $admin->setRoles(['ROLE_ADMIN']);
-        $admin->setLocale('fr');
 
         /**
          * CUSTOMERS
@@ -44,7 +43,6 @@ class UserFixtures extends Fixture
         $annecy->setPassword($this->encoder->encodePassword($annecy, 'annecy'));
         $annecy->setCreateAt();
         $annecy->setRoles(['ROLE_CUSTOMER']);
-        $annecy->setLocale('fr');
 
         $chambery = new User();
         $chambery->setEmail('chambery@annecy.fr');

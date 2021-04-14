@@ -1,0 +1,15 @@
+{% set title = "Catégorie" %}
+
+{% extends 'layout/base.html.twig' %}
+{% block body %}
+    {% for category in categories %}
+        <div>
+            <p>
+                                {{ category.name }}
+            </p>
+
+        </div>
+    {% endfor %}
+{% endblock %}
+
+
