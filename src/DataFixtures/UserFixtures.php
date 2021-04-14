@@ -50,7 +50,6 @@ class UserFixtures extends Fixture
         $chambery->setPassword($this->encoder->encodePassword($chambery, 'chambery'));
         $chambery->setCreateAt();
         $chambery->setRoles(['ROLE_CUSTOMER', 'ROLE_TEST']);
-        $chambery->setLocale('fr');
 
 
         $manager->persist($admin);
