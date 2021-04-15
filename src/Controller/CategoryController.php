@@ -11,10 +11,17 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/category', name: 'category_')]
 class CategoryController extends AbstractController
 {
-    #[Route('/', name: 'index')]
-    public function index(EntityManagerInterface $entityManager): Response
+
+    public function __construct(
+        private EntityManagerInterface $entityManager
+    )
     {
-        $repository = $entityManager->getRepository(Category::class);
+    }
+
+    #[Route('/', name: 'index')]
+    public function index(): Response
+    {
+        $repository = $this->entityManager->getRepository(Category::class);
         $categories = $repository->findAll();
         return $this->render('category/index.html.twig', [
             'controller_name' => 'CategoryController',
@@ -23,9 +30,9 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/add', name: 'add')]
-    public function add(EntityManagerInterface $entityManager): Response
+    public function add(): Response
     {
-        $repository = $entityManager->getRepository(Category::class);
+        $repository = $this->entityManager->getRepository(Category::class);
 
 
         return $this->render('category/index.html.twig', [
