@@ -6,7 +6,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  position: fixed;
+  position: relative;
   z-index: 7;
 }
 
@@ -65,8 +65,7 @@
 .link a:after {
   content: '';
   display: block;
-  margin: auto;
-  margin-top: 5px;
+  margin: 5px auto auto;
   height: 2px;
   width: 0;
   background: transparent;
