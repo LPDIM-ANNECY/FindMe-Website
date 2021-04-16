@@ -2,14 +2,16 @@
 
 {% extends 'layout/base.html.twig' %}
 {% block body %}
-    {% for category in categories %}
-        <div>
-            <p>
-                                {{ category.name }}
-            </p>
-
+    <div class="listContainer">
+        <div class="container" id="addContainer">
+            <div class="name">+</div>
         </div>
-    {% endfor %}
+        {% for category in categories %}
+            <div class="container">
+                <div class="name">{{ category.name }}</div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
 
 

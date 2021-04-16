@@ -1,0 +1,46 @@
+.listContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: calc(80px + 5%) 10% 0 10%;
+
+  .container {
+    display: flex;
+    height: 25vh;
+    border: solid 1px black;
+    border-radius: 25%;
+    width: 25vh;
+    justify-content: center;
+    margin: 2.5%;
+    cursor: pointer;
+    align-self: center;
+    animation: 2s ease-in-out all;
+
+    &#addContainer {
+      height: 15vh;
+      width: 15vh;
+      align-self: center;
+      transform: scale(1);
+      border-radius: 50%;
+      background-color: #689f38;
+      border: 0;
+
+      &:active {
+        transform: scale(0.9);
+        background-color: #269F38;
+      }
+    }
+
+    &:hover {
+      transform: scale(1.2);
+    }
+
+    &:active {
+      transform: scale(1.1);
+    }
+
+    .name {
+      align-self: center;
+    }
+  }
+}
