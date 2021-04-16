@@ -14,6 +14,8 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
+            ->add('first_name')
+            ->add('last_name')
             ->add('company_name', null, [
                 'label' => 'Nom de la compagnie',
                 'required' => true

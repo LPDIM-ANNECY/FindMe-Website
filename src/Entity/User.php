@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -48,6 +50,33 @@ class User implements UserInterface
      * @ORM\Column(type="string", nullable=true)
      */
     private ?string $password;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="employee")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private ?User $chief;
+
+    /**
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="chief")
+     */
+    private $employees;
+
+    /**
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $first_name;
+
+    /**
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $last_name;
+
+    public function __construct() {
+        $this->employees = new ArrayCollection();
+    }
 
     public function getId(): int
     {
@@ -150,4 +179,50 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+    public function getChief() : ?User
+    {
+        return $this->chief;
+    }
+
+    public function setChief(?User $chief) : self
+    {
+        return $this->chief = $chief;
+    }
+
+    public function getEmployees() : ArrayCollection
+    {
+        return $this->employees;
+    }
+
+    public function __toString(): string
+    {
+        return strtoupper($this->getLastName()) . ' ' . ucfirst(strtolower($this->getFirstName()));
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->first_name;
+    }
+
+    public function setFirstName(?string $first_name): self
+    {
+        $this->first_name = $first_name;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->last_name;
+    }
+
+    public function setLastName(?string $last_name): self
+    {
+        $this->last_name = $last_name;
+
+        return $this;
+    }
+
+
 }
