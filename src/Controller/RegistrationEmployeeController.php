@@ -22,8 +22,16 @@ class RegistrationEmployeeController extends AbstractController
     {
     }
 
+    #[Route('/', name: 'index')]
+    public function index(): Response
+    {
+        return $this->render('manageEmployee/index.html.twig', [
+            'controller_name' => 'RegistrationEmployeeController',
+        ]);
+    }
+
     #[Route('/create-account', name: 'createAccount')]
-    public function index(Request $request): Response
+    public function add(Request $request): Response
     {
         $user = (new User())->setCompanyName('tmp');
 
