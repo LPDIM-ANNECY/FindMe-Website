@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Form\CategoryType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use \Symfony\Component\HttpFoundation\Request;
 
 #[Route('/category', name: 'category_')]
 class CategoryController extends AbstractController
@@ -30,13 +32,42 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/add', name: 'add')]
-    public function add(): Response
+    public function addCategory(Request $request): Response
     {
-        $repository = $this->entityManager->getRepository(Category::class);
+        $form = $this->createForm(CategoryType::class);
+        $form->handleRequest($request);
 
+        if($form->isSubmitted() && $form->isValid() && $this->isGranted('ROLE_USER')) {
+            $category = $form->getData();
 
-        return $this->render('category/index.html.twig', [
+            $this->entityManager->persist($category);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'Catégorie crée');
+            return $this->redirectToRoute('category_read', ["id" => $category->getId()]);
+        }
+
+        return $this->render('category/add.html.twig', ['controller_name' => 'CategoryController',
+            'form' => $form->createView()]);
+    }
+
+    #[Route('/delete/{id}', name: 'delete')]
+    public function deleteCategory(Category $category): Response
+    {
+        $toDeletecategory = $this->entityManager->getRepository(Category::class)->find($category->getId());
+
+        $this->entityManager->remove($toDeletecategory);
+        $this->entityManager->flush();
+
+        return $this->redirect("/category");
+    }
+
+    #[Route('/{id}', name: 'read')]
+    public function getCategory(Category $category): Response
+    {
+        return $this->render('category/category.html.twig', [
             'controller_name' => 'CategoryController',
+            'category' => $category
         ]);
     }
 }
