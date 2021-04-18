@@ -1,0 +1,13 @@
+{% set title = "Place" %}
+
+{% extends 'layout/base.html.twig' %}
+{% block body %}
+    <div class="listContainer">
+        <div class="container">
+            <div class="name">{{ itinerary.name }}</div>
+        </div>
+        <div onclick="location='{{ path('itinerary_delete', {id: itinerary.id}) }}'">Delete</div>
+    </div>
+{% endblock %}
+
+

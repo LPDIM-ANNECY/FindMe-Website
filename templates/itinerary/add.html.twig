@@ -1,0 +1,19 @@
+{% set title = "Ajouté un itinéraire" %}
+
+{% extends 'layout/base.html.twig' %}
+{% block body %}
+    <h1>{{ title }}</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form._token) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.duration) }}
+    {{ form_row(form.length) }}
+    {{ form_row(form.active) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.places) }}
+    {{ form_row(form.create) }}
+    {{ form_end(form) }}
+{% endblock %}
+
+
