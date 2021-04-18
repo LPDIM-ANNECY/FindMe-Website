@@ -4,12 +4,12 @@
 {% block body %}
     <h1>{{ title }}</h1>
     <div class="listContainer">
-        <div class="container" id="addContainer" onclick="location='{{ path('category_add') }}'">
+        <div class="container" id="addContainer" onclick="location='{{ path('place_add') }}'">
             <div class="name">+</div>
         </div>
-        {% for category in categories %}
-            <div class="container" onclick="location='{{ path('category_read', {id: category.id}) }}'">
-                <div class="name">{{ category.name }}</div>
+        {% for place in places %}
+            <div class="container" onclick="location='{{ path('place_read', {id: place.id}) }}'">
+                <div class="name">{{ place.name }}</div>
             </div>
         {% endfor %}
     </div>

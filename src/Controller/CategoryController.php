@@ -54,9 +54,9 @@ class CategoryController extends AbstractController
     #[Route('/delete/{id}', name: 'delete')]
     public function deleteCategory(Category $category): Response
     {
-        $toDeletecategory = $this->entityManager->getRepository(Category::class)->find($category->getId());
+        $toDeleteCategory = $this->entityManager->getRepository(Category::class)->find($category->getId());
 
-        $this->entityManager->remove($toDeletecategory);
+        $this->entityManager->remove($toDeleteCategory);
         $this->entityManager->flush();
 
         return $this->redirect("/category");
