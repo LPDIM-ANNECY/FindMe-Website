@@ -6,6 +6,8 @@
         <div class="container">
             <div class="name">{{ place.name }}</div>
         </div>
+        <div onclick="location='{{ path('place_index') }}'">Back</div>
+        <div onclick="location='{{ path('place_edit', {id: place.id}) }}'">Edit</div>
         <div onclick="location='{{ path('place_delete', {id: place.id}) }}'">Delete</div>
     </div>
 {% endblock %}

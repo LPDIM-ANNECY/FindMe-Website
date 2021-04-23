@@ -1,9 +1,9 @@
-{% set title = "Ajouté un itinéraire" %}
+{% set title = "Modifier un itinéraire" %}
 
 {% extends 'layout/base.html.twig' %}
 {% block body %}
     <h1>{{ title }}</h1>
-
+    <div onclick="location='{{ path('itinerary_index') }}'">Back</div>
     {{ form_start(form) }}
     {{ form_row(form._token) }}
     {{ form_row(form.name) }}

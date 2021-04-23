@@ -23,10 +23,11 @@ class ItineraryType extends AbstractType
             ->add('places', EntityType::class, [
                 'class' => Place::class,
                 'label' => 'Places',
+                'choice_label' => 'name',
                 'expanded' => false,
                 'multiple' => true
             ])
-            ->add('create', SubmitType::class)
+            ->add('Enregistre', SubmitType::class)
         ;
     }
 

@@ -62,6 +62,27 @@ class CategoryController extends AbstractController
         return $this->redirect("/category");
     }
 
+    #[Route('/edit/{id}', name: 'edit')]
+    public function editCategory(Category $category, Request $request): Response
+    {
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid() && $this->isGranted('ROLE_USER')) {
+            $formCategory = $form->getData();
+
+            $this->entityManager->persist($formCategory);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'Catégorie mise à jour');
+            return $this->redirectToRoute('category_read', ["id" => $formCategory->getId()]);
+        }
+
+        return $this->render('category/edit.html.twig', ['controller_name' => 'CategoryController',
+            'form' => $form->createView(),
+            'category' => $category]);
+    }
+
     #[Route('/{id}', name: 'read')]
     public function getCategory(Category $category): Response
     {

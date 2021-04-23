@@ -1,4 +1,4 @@
-{% set title = "Place" %}
+{% set title = "Itinerary" %}
 
 {% extends 'layout/base.html.twig' %}
 {% block body %}
@@ -6,6 +6,8 @@
         <div class="container">
             <div class="name">{{ itinerary.name }}</div>
         </div>
+        <div onclick="location='{{ path('itinerary_index') }}'">Back</div>
+        <div onclick="location='{{ path('itinerary_edit', {id: itinerary.id}) }}'">Edit</div>
         <div onclick="location='{{ path('itinerary_delete', {id: itinerary.id}) }}'">Delete</div>
     </div>
 {% endblock %}

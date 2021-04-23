@@ -9,7 +9,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class PlaceType extends AbstractType
 {
@@ -26,10 +25,11 @@ class PlaceType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'label' => 'Catégories',
+                'choice_label' => 'name',
                 'expanded' => false,
                 'multiple' => false
             ])
-            ->add('create', SubmitType::class)
+            ->add('Enregistre', SubmitType::class)
         ;
     }
 

@@ -61,6 +61,27 @@ class ItineraryController extends AbstractController
         return $this->redirect("/itinerary");
     }
 
+    #[Route('/edit/{id}', name: 'edit')]
+    public function editPlace(Itinerary $itinerary, Request $request): Response
+    {
+        $form = $this->createForm(ItineraryType::class, $itinerary);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid() && $this->isGranted('ROLE_USER')) {
+            $formItinerary = $form->getData();
+
+            $this->entityManager->persist($formItinerary);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'Itineraire mise à jour');
+            return $this->redirectToRoute('itinerary_read', ["id" => $formItinerary->getId()]);
+        }
+
+        return $this->render('itinerary/edit.html.twig', ['controller_name' => 'ItineraryController',
+            'form' => $form->createView(),
+            'itinerary' => $itinerary]);
+    }
+
     #[Route('/{id}', name: 'read')]
     function getItinerary(Itinerary $itinerary){
         return $this->render('itinerary/itinerary.html.twig', [
