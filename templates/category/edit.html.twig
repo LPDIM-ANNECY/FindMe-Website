@@ -1,0 +1,14 @@
+{% set title = "Modifier une catégorie" %}
+
+{% extends 'layout/base.html.twig' %}
+{% block body %}
+    <h1>{{ title }}</h1>
+    <div onclick="location='{{ path('category_index') }}'">Back</div>
+    {{ form_start(form) }}
+    {{ form_row(form._token) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.Enregistre) }}
+    {{ form_end(form) }}
+{% endblock %}
+
+

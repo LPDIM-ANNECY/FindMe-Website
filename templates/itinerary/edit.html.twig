@@ -1,0 +1,30 @@
+{% set title = "Modifier un itinéraire" %}
+
+{% extends 'layout/base.html.twig' %}
+{% block body %}
+    <h1>{{ title }}</h1>
+    <div onclick="location='{{ path('itinerary_index') }}'">Back</div>
+    {{ form_start(form) }}
+    {{ form_row(form._token) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.duration) }}
+    {{ form_row(form.length) }}
+    {{ form_row(form.active) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.places) }}
+    {{ form_row(form.Enregistre) }}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+
+{% endblock %}
+
+{% block javascriptsCustom %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
+    <script>
+        $('select').select2()
+    </script>
+{% endblock %}
+

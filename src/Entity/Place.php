@@ -55,7 +55,7 @@ class Place
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=category::class, inversedBy="places")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="places")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
@@ -85,6 +85,11 @@ class Place
         $this->name = $name;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 
     public function getLatitude(): ?float

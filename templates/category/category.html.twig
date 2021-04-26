@@ -1,0 +1,15 @@
+{% set title = "Catégorie" %}
+
+{% extends 'layout/base.html.twig' %}
+{% block body %}
+    <div class="listContainer">
+        <div class="container">
+            <div class="name">{{ category.name }}</div>
+        </div>
+        <div onclick="location='{{ path('category_index') }}'">Back</div>
+        <div onclick="location='{{ path('category_edit', {id: category.id}) }}'">Edit</div>
+        <div onclick="location='{{ path('category_delete', {id: category.id}) }}'">Delete</div>
+    </div>
+{% endblock %}
+
+

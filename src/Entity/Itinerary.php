@@ -45,7 +45,7 @@ class Itinerary
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity=place::class, inversedBy="itineraries")
+     * @ORM\ManyToMany(targetEntity=Place::class, inversedBy="itineraries")
      */
     private $places;
 
