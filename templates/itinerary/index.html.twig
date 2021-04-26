@@ -9,7 +9,14 @@
         </div>
         {% for itinerary in itineraries %}
             <div class="container" onclick="location='{{ path('itinerary_read', {id: itinerary.id}) }}'">
-                <div class="name">{{ itinerary.name }}</div>
+                <div class="backgroundContainer">
+                    <div class="name">{{ itinerary.name }}</div>
+                </div>
+                <div class="icons">
+                    <i class="las la-trash"></i>
+                    <i class="las la-edit"></i>
+                    <i class="las la-eye"></i>
+                </div>
             </div>
         {% endfor %}
     </div>
