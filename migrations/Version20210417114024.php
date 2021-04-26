@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210414203425 extends AbstractMigration
+final class Version20210417114024 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -31,11 +31,13 @@ final class Version20210414203425 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_181CE54ADA6A219 ON itinerary_place (place_id)');
         $this->addSql('CREATE TABLE place (id INT NOT NULL, category_id INT NOT NULL, name VARCHAR(255) NOT NULL, latitude DOUBLE PRECISION NOT NULL, longitude DOUBLE PRECISION NOT NULL, difficulty INT NOT NULL, radius_type INT NOT NULL, active BOOLEAN NOT NULL, description TEXT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_741D53CD12469DE2 ON place (category_id)');
-        $this->addSql('CREATE TABLE public."user" (id INT NOT NULL, email VARCHAR(180) DEFAULT NULL, company_name VARCHAR(180) DEFAULT NULL, create_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, roles JSON NOT NULL, password VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE public."user" (id INT NOT NULL, chief_id INT DEFAULT NULL, email VARCHAR(180) DEFAULT NULL, company_name VARCHAR(180) DEFAULT NULL, create_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, roles JSON NOT NULL, password VARCHAR(255) DEFAULT NULL, first_name VARCHAR(255) DEFAULT NULL, last_name VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_327C5DE7E7927C74 ON public."user" (email)');
+        $this->addSql('CREATE INDEX IDX_327C5DE77A7B68E1 ON public."user" (chief_id)');
         $this->addSql('ALTER TABLE itinerary_place ADD CONSTRAINT FK_181CE54A15F737B2 FOREIGN KEY (itinerary_id) REFERENCES itinerary (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE itinerary_place ADD CONSTRAINT FK_181CE54ADA6A219 FOREIGN KEY (place_id) REFERENCES place (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE place ADD CONSTRAINT FK_741D53CD12469DE2 FOREIGN KEY (category_id) REFERENCES category (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE public."user" ADD CONSTRAINT FK_327C5DE77A7B68E1 FOREIGN KEY (chief_id) REFERENCES public."user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
     }
 
     public function down(Schema $schema) : void
@@ -44,6 +46,7 @@ final class Version20210414203425 extends AbstractMigration
         $this->addSql('ALTER TABLE place DROP CONSTRAINT FK_741D53CD12469DE2');
         $this->addSql('ALTER TABLE itinerary_place DROP CONSTRAINT FK_181CE54A15F737B2');
         $this->addSql('ALTER TABLE itinerary_place DROP CONSTRAINT FK_181CE54ADA6A219');
+        $this->addSql('ALTER TABLE public."user" DROP CONSTRAINT FK_327C5DE77A7B68E1');
         $this->addSql('DROP SEQUENCE category_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE itinerary_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE place_id_seq CASCADE');
