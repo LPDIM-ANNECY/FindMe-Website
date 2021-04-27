@@ -51,6 +51,17 @@
           }
         }
       }
+
+      .image {
+        position: absolute;
+        height: auto;
+        width: auto;
+        max-width: 25%;
+        max-height: 25%;
+        z-index: 50;
+        top: 5%;
+        right: 5%;
+      }
     }
   }
 }
