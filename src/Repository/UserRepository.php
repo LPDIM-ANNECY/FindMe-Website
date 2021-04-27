@@ -38,10 +38,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
 
-    public function getAllCustomer()
+    public function findAllEmployee()
     {
         $qb = $this->createQueryBuilder('u');
-        $qb->select('u.id,u.email,u.company_name,u.create_at,u.roles,u.locale');
 
         // work only pgAdmin
         //$qb->where("u.roles::jsonb ? 'ROLE_CUSTOMER'");
@@ -49,7 +48,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $users = $qb->getQuery()->getResult(AbstractQuery::HYDRATE_ARRAY);
 
         return array_filter($users, function ($v) {
-            return in_array("ROLE_CUSTOMER", $v['roles']);
+            return in_array("ROLE_EMPLOYEE", $v['roles']);
         });
     }
 
