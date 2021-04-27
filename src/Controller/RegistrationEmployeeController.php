@@ -26,11 +26,11 @@ class RegistrationEmployeeController extends AbstractController
     public function index(): Response
     {
         return $this->render('manageEmployee/index.html.twig', [
-            'controller_name' => 'RegistrationEmployeeController',
+            'employees' => $this->entityManager->getRepository(User::class)->findAllEmployee()
         ]);
     }
 
-    #[Route('/create-account', name: 'createAccount')]
+    #[Route('/add', name: 'add')]
     public function add(Request $request): Response
     {
         $user = (new User())->setCompanyName('tmp');
@@ -54,7 +54,7 @@ class RegistrationEmployeeController extends AbstractController
             $this->entityManager->flush();
         }
 
-        return $this->render('manageEmployee/createAccount.html.twig', [
+        return $this->render('manageEmployee/add.html.twig', [
             'form' => $form->createView()
         ]);
     }

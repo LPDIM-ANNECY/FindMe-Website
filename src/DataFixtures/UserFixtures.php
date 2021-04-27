@@ -23,13 +23,11 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $admin = new User();
-
         /**
          * ADMIN
          */
+        $admin = new User();
         $admin->setEmail('me@test200.fr');
-        $admin->setCompanyName('Test200');
         $admin->setPassword($this->encoder->encodePassword($admin, 'test200'));
         $admin->setCreateAt();
         $admin->setRoles(['ROLE_ADMIN']);
@@ -37,24 +35,42 @@ class UserFixtures extends Fixture
         /**
          * CUSTOMERS
          */
-        $annecy = new User();
-        $annecy->setEmail('annecy@annecy.fr');
-        $annecy->setCompanyName("Office de Tourisme du Lac d'Annecy");
-        $annecy->setPassword($this->encoder->encodePassword($annecy, 'annecy'));
-        $annecy->setCreateAt();
-        $annecy->setRoles(['ROLE_CUSTOMER']);
+        $chief = new User();
+        $chief->setEmail('chief@annecy.fr');
+        $chief->setFirstName('Nathan');
+        $chief->setLastName('Cuvellier');
+        $chief->setPassword($this->encoder->encodePassword($chief, 'annecy'));
+        $chief->setCreateAt();
+        $chief->setRoles(['ROLE_CHIEF']);
 
-        $chambery = new User();
-        $chambery->setEmail('chambery@annecy.fr');
-        $chambery->setCompanyName("Grand Chambéry Alpes Tourisme");
-        $chambery->setPassword($this->encoder->encodePassword($chambery, 'chambery'));
-        $chambery->setCreateAt();
-        $chambery->setRoles(['ROLE_CUSTOMER', 'ROLE_TEST']);
+        /**
+         * CUSTOMERS
+         */
+        $employee1 = new User();
+        $employee1->setEmail('1@annecy.fr');
+        $employee1->setFirstName('Francois');
+        $employee1->setLastName('Cottle');
+        $employee1->setEmail('1@annecy.fr');
+        $employee1->setPassword($this->encoder->encodePassword($employee1, 'annecy'));
+        $employee1->setCreateAt();
+        $employee1->setRoles(['ROLE_EMPLOYEE']);
+
+        /**
+         * CUSTOMERS
+         */
+        $employee2 = new User();
+        $employee2->setEmail('2@annecy.fr');
+        $employee2->setFirstName('Ginelle');
+        $employee2->setLastName('Saffen');
+        $employee2->setPassword($this->encoder->encodePassword($employee2, 'annecy'));
+        $employee2->setCreateAt();
+        $employee2->setRoles(['ROLE_EMPLOYEE']);
 
 
         $manager->persist($admin);
-        $manager->persist($annecy);
-        $manager->persist($chambery);
+        $manager->persist($chief);
+        $manager->persist($employee1);
+        $manager->persist($employee2);
         $manager->flush();
     }
 }
