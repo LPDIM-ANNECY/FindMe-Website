@@ -52,7 +52,7 @@ class User implements UserInterface
     private ?string $password;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="employee")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="employees")
      * @ORM\JoinColumn(nullable=true)
      */
     private ?User $chief;
