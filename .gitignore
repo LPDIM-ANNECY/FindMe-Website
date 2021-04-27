@@ -18,3 +18,4 @@
 # custom
 .env
 .idea
+/public/img/places
