@@ -10,15 +10,7 @@
 
       .backgroundContainer {
         margin: 0 5% 0 5%;
-      }
-
-      .divider {
-        width: 1px;
-        background-color: #000;
-        height: 75%;
-        margin: 0 5% 0 5%;
-        align-self: center;
-        opacity: 0.7;
+        min-width: 0;
       }
 
       .itemDetail {
@@ -26,6 +18,7 @@
         flex-direction: column;
         margin: 0 5% 0 5%;
         align-self: center;
+        width: auto;
 
         div {
           display: flex;
