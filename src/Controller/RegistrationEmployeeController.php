@@ -33,7 +33,7 @@ class RegistrationEmployeeController extends AbstractController
     #[Route('/add', name: 'add')]
     public function add(Request $request): Response
     {
-        $user = (new User())->setCompanyName('tmp');
+        $user = new User();
 
         $form = $this->createForm(UserType::class, $user)
             ->remove('company_name')
@@ -48,8 +48,6 @@ class RegistrationEmployeeController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
-            $user->setCompanyName('tmp');
-
             $this->entityManager->persist($user);
             $this->entityManager->flush();
         }
@@ -58,4 +56,18 @@ class RegistrationEmployeeController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    #[Route('/edit/{id}', name: 'edit')]
+    public function edit(Request $request): Response
+    {
+
+    }
+
+    #[Route('/delete/{id}', name: 'delete')]
+    public function delete(Request $request): Response
+    {
+
+    }
+
+
 }

@@ -30,12 +30,6 @@ class User implements UserInterface
     private ?string $email;
 
     /**
-     * @Assert\NotBlank()
-     * @ORM\Column(type="string", length=180, nullable=true)
-     */
-    private ?string $company_name;
-
-    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?DateTime $create_at;
@@ -103,18 +97,6 @@ class User implements UserInterface
     public function getUsername(): string
     {
         return (string) $this->email;
-    }
-
-    public function getCompanyName() : ?string
-    {
-        return $this->company_name;
-    }
-
-    public function setCompanyName(?string $company_name): self
-    {
-        $this->company_name = $company_name;
-
-        return $this;
     }
 
     public function getCreateAt(): ?DateTime
