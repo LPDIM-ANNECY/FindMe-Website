@@ -2,7 +2,16 @@
 
 {% extends 'layout/base.html.twig' %}
 {% block body %}
-    <div class="titleMenu">
-        <div class="title">{{ title }}</div>
+    <h1>{{ title }}</h1>
+
+    <div class="listContainer">
+        <div class="container" id="addContainer" onclick="location='{{ path('manageEmployee_add') }}'">
+            <div class="addButton"><i class="las la-plus"></i></div>
+        </div>
+        {% for employee in employees %}
+            <div class="container">
+                <div class="backgroundContainer">{{ employee.first_name ~ ' ' ~ employee.last_name | upper }}</div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}

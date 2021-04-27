@@ -29,7 +29,6 @@ class PlaceType extends AbstractType
                 'expanded' => false,
                 'multiple' => false
             ])
-            ->add('Enregistre', SubmitType::class)
         ;
     }
 
