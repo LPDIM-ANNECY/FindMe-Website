@@ -2,20 +2,24 @@
 
 {% extends 'layout/base.html.twig' %}
 {% block body %}
-    <h1>{{ title }}</h1>
+    <div class="titleMenu">
+        <div class="title">{{ title }}</div>
+    </div>
     <div class="listContainer">
         <div class="container" id="addContainer" onclick="location='{{ path('place_add') }}'">
-            <div class="name">+</div>
+            <div class="addButton">
+                <i class="las la-plus"></i>
+            </div>
         </div>
         {% for place in places %}
-            <div class="container" onclick="location='{{ path('place_read', {id: place.id}) }}'">
+            <div class="container">
                 <div class="backgroundContainer">
                     <div class="name">{{ place.name }}</div>
                 </div>
                 <div class="icons">
-                    <i class="las la-trash"></i>
-                    <i class="las la-edit"></i>
-                    <i class="las la-eye"></i>
+                    <i class="las la-trash" onclick="location='{{ path('place_delete', {id: place.id}) }}'"></i>
+                    <i class="las la-edit" onclick="location='{{ path('place_edit', {id: place.id}) }}'"></i>
+                    <i class="las la-eye" onclick="location='{{ path('place_read', {id: place.id}) }}'"></i>
                 </div>
             </div>
         {% endfor %}

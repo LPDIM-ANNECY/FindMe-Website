@@ -6,6 +6,8 @@
         <div class="titleMenu">
             <i class="las la-arrow-left" onclick="location='{{ path('category_index') }}'"></i>
             <div class="title">{{ title }}</div>
+            <i class="las la-trash" onclick="location='{{ path('category_delete', {id: category.id}) }}'"></i>
+            <i class="las la-edit" onclick="location='{{ path('category_edit', {id: category.id}) }}'"></i>
         </div>
 
         <div class="container view">

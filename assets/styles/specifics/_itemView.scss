@@ -1,0 +1,63 @@
+.listContainer {
+  .container {
+    &.view {
+      width: auto;
+      pointer-events: none;
+      white-space: nowrap;
+      padding: 2.5%;
+      height: auto;
+      margin-bottom: 5%;
+
+      .backgroundContainer {
+        margin: 0 5% 0 5%;
+      }
+
+      .divider {
+        width: 1px;
+        background-color: #000;
+        height: 75%;
+        margin: 0 5% 0 5%;
+        align-self: center;
+        opacity: 0.7;
+      }
+
+      .itemDetail {
+        display: flex;
+        flex-direction: column;
+        margin: 0 5% 0 5%;
+        align-self: center;
+
+        div {
+          display: flex;
+          white-space: nowrap;
+          margin: 1%;
+
+          &.description {
+            .itemDetailValue {
+              display: block;
+              white-space: break-spaces;
+              text-align: justify;
+            }
+          }
+
+          &.places {
+            .itemDetailValue {
+              display: block;
+              white-space: break-spaces;
+            }
+          }
+
+          .itemDetailName {
+            font-weight: bold;
+            margin-right: 2.5%;
+            align-self: center;
+          }
+
+          .itemDetailValue {
+            align-self: center;
+          }
+        }
+      }
+    }
+  }
+}

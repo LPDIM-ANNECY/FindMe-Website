@@ -3,13 +3,42 @@
 {% extends 'layout/base.html.twig' %}
 {% block body %}
     <div class="listContainer">
-        <div class="container">
-            <div class="name">{{ itinerary.name }}</div>
+        <div class="titleMenu">
+            <i class="las la-arrow-left" onclick="location='{{ path('itinerary_index') }}'"></i>
+            <div class="title">{{ title }}</div>
+            <i class="las la-trash" onclick="location='{{ path('itinerary_delete', {id: itinerary.id}) }}'"></i>
+            <i class="las la-edit" onclick="location='{{ path('itinerary_edit', {id: itinerary.id}) }}'"></i>
         </div>
-        <div onclick="location='{{ path('itinerary_index') }}'">Back</div>
-        <div onclick="location='{{ path('itinerary_edit', {id: itinerary.id}) }}'">Edit</div>
-        <div onclick="location='{{ path('itinerary_delete', {id: itinerary.id}) }}'">Delete</div>
+
+        <div class="container view">
+            <div class="backgroundContainer">
+                <div class="name">{{ itinerary.name }}</div>
+            </div>
+            <div class="divider"></div>
+            <div class="itemDetail">
+                <div class="duration">
+                    <div class="itemDetailName">Durée : </div>
+                    <div class="itemDetailValue">{{ itinerary.duration }}</div>
+                </div>
+                <div class="length">
+                    <div class="itemDetailName">Distance à parcourir : </div>
+                    <div class="itemDetailValue">{{ itinerary.length }} KM</div>
+                </div>
+                <div class="active">
+                    <div class="itemDetailName">Active : </div>
+                    <div class="itemDetailValue">{{ itinerary.active }}</div>
+                </div>
+                <div class="description">
+                    <div class="itemDetailName">Description : </div>
+                    <div class="itemDetailValue">{{ itinerary.description }}</div>
+                </div>
+                <div class="places">
+                    <div class="itemDetailName">Places : </div>
+                    {% for place in itinerary.places %}
+                        <div class="itemDetailValue">{{ place }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
-
-

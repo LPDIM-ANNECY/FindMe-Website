@@ -2,10 +2,14 @@
 
 {% extends 'layout/base.html.twig' %}
 {% block body %}
-    <h1>{{ title }}</h1>
+    <div class="titleMenu">
+        <div class="title">{{ title }}</div>
+    </div>
     <div class="listContainer">
         <div class="container" id="addContainer" onclick="location='{{ path('itinerary_add') }}'">
-            <div class="name">+</div>
+            <div class="addButton">
+                <i class="las la-plus"></i>
+            </div>
         </div>
         {% for itinerary in itineraries %}
             <div class="container" onclick="location='{{ path('itinerary_read', {id: itinerary.id}) }}'">
@@ -13,9 +17,9 @@
                     <div class="name">{{ itinerary.name }}</div>
                 </div>
                 <div class="icons">
-                    <i class="las la-trash"></i>
-                    <i class="las la-edit"></i>
-                    <i class="las la-eye"></i>
+                    <i class="las la-trash" onclick="location='{{ path('itinerary_delete', {id: itinerary.id}) }}'"></i>
+                    <i class="las la-edit" onclick="location='{{ path('itinerary_edit', {id: itinerary.id}) }}'"></i>
+                    <i class="las la-eye" onclick="location='{{ path('itinerary_read', {id: itinerary.id}) }}'"></i>
                 </div>
             </div>
         {% endfor %}
