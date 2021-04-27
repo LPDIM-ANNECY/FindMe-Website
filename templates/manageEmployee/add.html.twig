@@ -2,6 +2,10 @@
 
 {% extends 'layout/base.html.twig' %}
 {% block body %}
+    <div class="titleMenu">
+        <i class="las la-arrow-left" onclick="location='{{ path('category_index') }}'"></i>
+        <div class="title">{{ title }}</div>
+    </div>
     <div class="container">
         {{ form_start(form) }}
 
