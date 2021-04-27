@@ -23,7 +23,7 @@ form {
         width: 100%;
     }
 
-    input[type=text], input[type=password], input[type=number], textarea, select {
+    input[type=text],input[type=email], input[type=password], input[type=number], textarea, select {
         height: $input-height;
         background-color: $input-background;
         border: #CCCCCC solid 1px;

@@ -16,10 +16,6 @@ class UserType extends AbstractType
             ->add('email')
             ->add('first_name')
             ->add('last_name')
-            ->add('company_name', null, [
-                'label' => 'Nom de la compagnie',
-                'required' => true
-            ])
             ->add('password', PasswordType::class, [
                 'label' => 'Mot de passe',
                 'required' => true

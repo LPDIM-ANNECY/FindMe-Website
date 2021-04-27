@@ -27,6 +27,7 @@ class User implements UserInterface
      * @Assert\NotBlank()
      * @ORM\Column(type="string", length=180, unique=true, nullable=true)
      */
+    #[Assert\Email()]
     private ?string $email;
 
     /**
@@ -40,9 +41,10 @@ class User implements UserInterface
     private array $roles = [];
 
     /**
-     * @var string The hashed password
+     * @var ?string The hashed password
      * @ORM\Column(type="string", nullable=true)
      */
+    #[Assert\Length(5)]
     private ?string $password;
 
     /**
@@ -60,12 +62,14 @@ class User implements UserInterface
      * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    #[Assert\Length(null,3,255)]
     private $first_name;
 
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    #[Assert\Length(null,3,255)]
     private $last_name;
 
     public function __construct() {

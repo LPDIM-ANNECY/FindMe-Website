@@ -36,7 +36,6 @@ class RegistrationEmployeeController extends AbstractController
         $user = new User();
 
         $form = $this->createForm(UserType::class, $user)
-            ->remove('company_name')
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'required' => true,
