@@ -46,7 +46,9 @@ class RegistrationEmployeeController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            /** @var User $user */
             $user = $form->getData();
+            $user->setChief($this->getUser());
             $this->entityManager->persist($user);
             $this->entityManager->flush();
         }
@@ -63,9 +65,13 @@ class RegistrationEmployeeController extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'delete')]
-    public function delete(Request $request): Response
+    public function delete(User $user): Response
     {
+        $this->entityManager->remove($user);
+        $this->entityManager->flush();
 
+        $this->addFlash('success', "L'utilisateur $user à bien été supprimé");
+        return $this->redirectToRoute('manageEmployee_index');
     }
 
 
