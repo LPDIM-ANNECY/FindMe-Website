@@ -11,13 +11,15 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 #[Route('/manage-employee', name: 'manageEmployee_')]
 class RegistrationEmployeeController extends AbstractController
 {
 
     public function __construct(
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
+        private UserPasswordEncoderInterface $encoder
     )
     {
     }
@@ -49,6 +51,7 @@ class RegistrationEmployeeController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             /** @var User $user */
             $user = $form->getData();
+            $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
             $user->setChief($this->getUser());
             $user->setRoles(['ROLE_EMPLOYEE']);
             $this->entityManager->persist($user);
@@ -64,9 +67,26 @@ class RegistrationEmployeeController extends AbstractController
     }
 
     #[Route('/edit/{id}', name: 'edit')]
-    public function edit(Request $request): Response
+    public function edit(User $user, Request $request): Response
     {
+        $form = $this->createForm(UserType::class, $user);
 
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            /** @var User $user */
+            $user = $form->getData();
+            $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', "L'utilisateur à bien été mise à jour");
+            return $this->redirectToRoute('manageEmployee_index');
+        }
+
+        return $this->render('manageEmployee/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     #[Route('/delete/{id}', name: 'delete')]

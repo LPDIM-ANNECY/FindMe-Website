@@ -1,0 +1,25 @@
+{% set title = "Créer un compte employé" %}
+
+{% extends 'layout/base.html.twig' %}
+{% block body %}
+    <div class="titleMenu">
+        <i class="las la-arrow-left" onclick="location='{{ path('manageEmployee_index') }}'"></i>
+        <div class="title">{{ title }}</div>
+    </div>
+    <div class="container">
+        {{ form_start(form) }}
+
+        {{ form_row(form.first_name) }}
+        {{ form_row(form.last_name) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password) }}
+
+        <div class="form-group my-3">
+            <input class="btn" type="submit" value="Valider">
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+
