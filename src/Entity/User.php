@@ -46,7 +46,7 @@ class User implements UserInterface
      * @var ?string The hashed password
      * @ORM\Column(type="string", nullable=true)
      */
-    #[Assert\Length(null,5)]
+    #[Assert\Length(min: 5, groups: ['registration'])]
     private ?string $password;
 
     /**

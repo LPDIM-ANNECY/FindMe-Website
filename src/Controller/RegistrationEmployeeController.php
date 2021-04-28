@@ -37,7 +37,7 @@ class RegistrationEmployeeController extends AbstractController
     {
         $user = new User();
 
-        $form = $this->createForm(UserType::class, $user)
+        $form = $this->createForm(UserType::class, $user, ['validation_groups' => 'registration'])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'required' => true,
@@ -69,6 +69,7 @@ class RegistrationEmployeeController extends AbstractController
     #[Route('/edit/{id}', name: 'edit')]
     public function edit(User $user, Request $request): Response
     {
+        $oldData = clone $user;
         $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);
@@ -76,7 +77,13 @@ class RegistrationEmployeeController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             /** @var User $user */
             $user = $form->getData();
-            $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
+
+            if(strlen($user->getPassword()) > 0)
+                $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
+            else
+                $user->setPassword($oldData->getPassword());
+
+
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
