@@ -2,7 +2,9 @@
 
 {% extends 'layout/base.html.twig' %}
 {% block body %}
-    <h1>{{ title }}</h1>
+    <div class="titleMenu">
+        <div class="title">{{ title }}</div>
+    </div>
 
     <div class="listContainer">
         <div class="container" id="addContainer" onclick="location='{{ path('manageEmployee_add') }}'">
