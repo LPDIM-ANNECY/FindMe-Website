@@ -39,6 +39,7 @@ class RegistrationEmployeeController extends AbstractController
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'required' => true,
+                'invalid_message' => 'Les champs du mot de passe doivent correspondre',
                 'first_options'  => ['label' => 'Mot de passe'],
                 'second_options' => ['label' => 'Mot de pass de confirmation'],
             ]);
@@ -49,8 +50,12 @@ class RegistrationEmployeeController extends AbstractController
             /** @var User $user */
             $user = $form->getData();
             $user->setChief($this->getUser());
+            $user->setRoles(['ROLE_EMPLOYEE']);
             $this->entityManager->persist($user);
             $this->entityManager->flush();
+
+            $this->addFlash('success', "L'utilisateur à bien été ajouté");
+            return $this->redirectToRoute('manageEmployee_index');
         }
 
         return $this->render('manageEmployee/add.html.twig', [
