@@ -1,0 +1,11 @@
+.flash {
+    padding: 20px 10px;
+    width: 650px;
+    max-width: calc(100% - 20px);
+    margin: 20px auto 0 auto;
+}
+
+.flash-success {
+    background-color: $green;
+    color: $white;
+}
