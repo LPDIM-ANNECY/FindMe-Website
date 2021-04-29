@@ -32,6 +32,14 @@ class RegistrationEmployeeController extends AbstractController
         ]);
     }
 
+    #[Route('/read/{id}', name: 'read')]
+    public function read(User $user, Request $request): Response
+    {
+        return $this->render('manageEmployee/read.html.twig', [
+            'employee' => $user
+        ]);
+    }
+
     #[Route('/add', name: 'add')]
     public function add(Request $request): Response
     {

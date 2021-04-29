@@ -16,6 +16,7 @@
                 <div class="icons">
                     <i class="las la-trash" onclick="location='{{ path('manageEmployee_delete', {id: employee.id}) }}'"></i>
                     <i class="las la-edit" onclick="location='{{ path('manageEmployee_edit', {id: employee.id}) }}'"></i>
+                    <i class="las la-eye" onclick="location='{{ path('manageEmployee_read', {id: employee.id}) }}'"></i>
                 </div>
             </div>
         {% endfor %}
