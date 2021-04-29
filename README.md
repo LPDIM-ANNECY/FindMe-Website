@@ -4,5 +4,5 @@
 
 _school project in LPDIM_
 
-Web site to manage the patrimony (only of Annecy (France) for the moment).
-It will be used for example to list monuments, put descriptions, photos etc...
+Site de gestion du patrimoine d'Annecy (France).
+Il servira par exemple à lister des monuments, mettre des descriptions, des photos etc ...
