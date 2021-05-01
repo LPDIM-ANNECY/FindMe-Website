@@ -39,6 +39,7 @@ class PlaceController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid() && $this->isGranted('ROLE_USER')) {
             $place = $form->getData();
+            $place->setUpdateAt(new \DateTime('now'));
 
             $this->entityManager->persist($place);
             $this->entityManager->flush();

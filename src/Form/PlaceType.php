@@ -34,7 +34,6 @@ class PlaceType extends AbstractType
             ->add('image', FileType::class, [
                 'required' => false,
             ])
-            ->add('Enregistre', SubmitType::class)
         ;
     }
 

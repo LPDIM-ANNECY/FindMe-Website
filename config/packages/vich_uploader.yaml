@@ -5,6 +5,7 @@ vich_uploader:
         places_image:
             uri_prefix: /img/places
             upload_destination: '%kernel.project_dir%/public/img/places'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
 
     #mappings:
     #    products:
