@@ -40,14 +40,18 @@
     z-index:1;
 
     .backgroundContainer {
-      display: flex;
       justify-content: center;
       flex-direction: column;
+      position: absolute;
+      height: 25vh;
+      width: 20vh;
+      display: flex;
       text-align: center;
 
       .name {
         align-self: center;
         user-select: none;
+        margin: 10px;
       }
     }
 

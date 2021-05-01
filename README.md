@@ -19,7 +19,7 @@ $ composer install
 Configurer votre php init et décommenter ses 2 lignes :
 ```
 extension=fileinfo
-extension=gb
+extension=gd
 ```
 Configurer le fichier `.env` pour utiliser une base de donnée
 
@@ -32,6 +32,6 @@ $ php bin/console doctrine:fixtures:load
 
 Pour régénérer le style css, si vous avec sass d'installer :
 ```
-$ sass assets/styles/app.scss public/assets/styles/app.css --style compressed 
+$ sass assets/styles/app.scss public/assets/styles/app.css --style compressed --watch
 ```
 
