@@ -15,7 +15,9 @@
             <div class="container">
                 <div class="backgroundContainer">
                     {% if place.imageFileName %}
-                        <img src="{{ vich_uploader_asset(place, 'image') }}" alt="">
+                        <img src="{{ vich_uploader_asset(place, 'image') | imagine_filter('thumb') }}" alt="">
+                    {% else %}
+                        <img src="{{ '/img/img_logo_blue.jpg' | imagine_filter('thumb') }}" alt="">
                     {% endif %}
                     <div class="name">{{ place.name }}</div>
                 </div>

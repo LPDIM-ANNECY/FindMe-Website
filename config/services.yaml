@@ -35,3 +35,7 @@ services:
         arguments: ['%kernel.default_locale%']
         # uncomment the next line if you are not using autoconfigure
         # tags: [kernel.event_subscriber]
+
+    App\Listener\ImageCacheSubscriber:
+        tags:
+        - { name: doctrine.event_subscriber }

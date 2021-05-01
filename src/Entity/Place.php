@@ -32,20 +32,25 @@ class Place
 
     /**
      * @var File|null
-     * @Assert\File(
-     *     maxSize = "2M",
-     *     mimeTypes = {"image/jpeg", "image/png"},
-     *     mimeTypesMessage = "Le fichier choisi ne correspond pas à un fichier valide",
-     *     notFoundMessage = "Le fichier n'a pas été trouvé sur le disque",
-     *     uploadErrorMessage = "Erreur dans l'upload du fichier"
-     *  )
      * @Vich\UploadableField(mapping="places_image", fileNameProperty="imageFileName")
      */
+    #[Assert\Image(
+        maxSize: "2M",
+        mimeTypes: ['image/jpeg'],
+        notFoundMessage: "Le fichier n'a pas été trouvé sur le disque",
+        mimeTypesMessage: "Le fichier choisi ne correspond pas à un fichier valide (JPEG)",
+        uploadErrorMessage: "Erreur dans l'upload du fichier"
+    )]
     private $image;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
+    #[Assert\Length(
+        min: 3,
+        max: 255,
+    )]
     private $name;
 
     /**
@@ -75,6 +80,7 @@ class Place
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     private $description;
 
