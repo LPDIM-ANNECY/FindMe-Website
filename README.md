@@ -4,5 +4,28 @@
 
 _school project in LPDIM_
 
-Web site to manage the patrimony (only of Annecy (France) for the moment).
-It will be used for example to list monuments, put descriptions, photos etc...
+Site de gestion du patrimoine d'Annecy (France).
+Il servira par exemple à lister des monuments, mettre des descriptions, des photos etc ...
+
+## Déploiement en prod
+[https://findme.nathan-cuvellier.fr/](https://findme.nathan-cuvellier.fr/)
+
+## Getting started
+
+Installation des dépendances
+```sh
+$ composer install
+```
+Configurer le fichier `.env` pour utiliser une base de donnée
+
+*Les migrations actuelles sont générées pour PostgresSQL*
+```sh
+$ php bin/console doctrine:database:create
+$ php bin/console doctrine:migration:migrate
+$ php bin/console doctrine:fixtures:load
+```
+
+Pour régénérer le style css, si vous avec sass d'installer :
+```
+$ sass assets/styles/app.scss public/assets/styles/app.css --style compressed 
+```

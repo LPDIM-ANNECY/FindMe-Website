@@ -6,13 +6,15 @@
     </div>
     <ul id="navLink">
         {% if not app.user %}
-            <li class="link"><a href="{{ path('app_login') }}">Connexion</a></li>
+            <li class="link"><a href="{{ path('app_login') }}"><i class="lar la-2x la-user"></i>Connexion</a></li>
         {% else %}
-            <li class="link"><a href="{{ path('category_index') }}">Catégorie</a></li>
-            <li class="link"><a href="{{ path('place_index') }}">Place</a></li>
-            <li class="link"><a href="{{ path('itinerary_index') }}">Itinéraire</a></li>
-            <li class="link"><a href="{{ path('manageEmployee_index') }}">User</a></li>
-            <li class="link"><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+            <li class="link"><a href="{{ path('category_index') }}"><i class="las la-2x la-tags"></i>Catégorie</a></li>
+            <li class="link"><a href="{{ path('place_index') }}"><i class="las la-2x la-map-marked-alt"></i>Place</a></li>
+            <li class="link"><a href="{{ path('itinerary_index') }}"><i class="las la-2x la-route"></i>Itinéraire</a></li>
+            {% if is_granted('ROLE_CHIEF') %}
+            <li class="link"><a href="{{ path('manageEmployee_index') }}"><i class="las la-2x la-user"></i>User</a></li>
+            {% endif %}
+            <li class="link"><a href="{{ path('app_logout') }}"><i class="las la-2x la-sign-out-alt"></i>Déconnexion</a></li>
         {% endif %}
     </ul>
 </div>

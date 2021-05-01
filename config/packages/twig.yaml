@@ -1,5 +1,6 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    form_themes: ['form/findme_theme.html.twig']
     globals:
         app_name: 'Find Me Admin'
         locales: '%app.locales%'

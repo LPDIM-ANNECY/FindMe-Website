@@ -27,7 +27,6 @@ class ItineraryType extends AbstractType
                 'expanded' => false,
                 'multiple' => true
             ])
-            ->add('Enregistre', SubmitType::class)
         ;
     }
 

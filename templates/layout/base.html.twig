@@ -38,6 +38,17 @@
         {% endif %}
 
         <div class="content position-relative">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash flash-{{ label }}">
+                        {% if label == 'success' %}
+                        <i class="las la-check"></i>
+                        {% endif %}
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
             {% block body %}{% endblock %}
         </div>
 

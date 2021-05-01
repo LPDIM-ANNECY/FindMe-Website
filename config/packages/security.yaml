@@ -25,6 +25,10 @@ security:
                 path: app_logout
                 # where to redirect after logout
                 target: /
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 2628000 # 1 month in seconds
+                path: /
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -34,8 +38,12 @@ security:
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
+    role_hierarchy:
+        ROLE_CHIEF: ROLE_EMPLOYEE
+
     access_control:
         - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, role: ROLE_USER }
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/manage-employee/, roles: ROLE_CHIEF }
+        - { path: ^/, role: ROLE_USER }

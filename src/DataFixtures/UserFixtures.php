@@ -24,15 +24,6 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         /**
-         * ADMIN
-         */
-        $admin = new User();
-        $admin->setEmail('me@test200.fr');
-        $admin->setPassword($this->encoder->encodePassword($admin, 'test200'));
-        $admin->setCreateAt();
-        $admin->setRoles(['ROLE_ADMIN']);
-
-        /**
          * CUSTOMERS
          */
         $chief = new User();
@@ -52,6 +43,7 @@ class UserFixtures extends Fixture
         $employee1->setLastName('Cottle');
         $employee1->setEmail('1@annecy.fr');
         $employee1->setPassword($this->encoder->encodePassword($employee1, 'annecy'));
+        $employee1->setChief($chief);
         $employee1->setCreateAt();
         $employee1->setRoles(['ROLE_EMPLOYEE']);
 
@@ -63,11 +55,10 @@ class UserFixtures extends Fixture
         $employee2->setFirstName('Ginelle');
         $employee2->setLastName('Saffen');
         $employee2->setPassword($this->encoder->encodePassword($employee2, 'annecy'));
+        $employee2->setChief($chief);
         $employee2->setCreateAt();
         $employee2->setRoles(['ROLE_EMPLOYEE']);
 
-
-        $manager->persist($admin);
         $manager->persist($chief);
         $manager->persist($employee1);
         $manager->persist($employee2);

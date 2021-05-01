@@ -5,4 +5,20 @@
     <div class="titleMenu">
         <div class="title">{{ title }}</div>
     </div>
+
+    <div class="listContainer">
+        <div class="container" id="addContainer" onclick="location='{{ path('manageEmployee_add') }}'">
+            <div class="addButton"><i class="las la-plus"></i></div>
+        </div>
+        {% for employee in employees %}
+            <div class="container">
+                <div class="backgroundContainer">{{ employee.first_name ~ ' ' ~ employee.last_name | upper }}</div>
+                <div class="icons">
+                    <i class="las la-trash" onclick="location='{{ path('manageEmployee_delete', {id: employee.id}) }}'"></i>
+                    <i class="las la-edit" onclick="location='{{ path('manageEmployee_edit', {id: employee.id}) }}'"></i>
+                    <i class="las la-eye" onclick="location='{{ path('manageEmployee_read', {id: employee.id}) }}'"></i>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

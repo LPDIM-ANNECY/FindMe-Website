@@ -7,6 +7,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -14,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(schema="public")
  */
+#[UniqueEntity('email')]
 class User implements UserInterface
 {
     /**
@@ -27,13 +29,8 @@ class User implements UserInterface
      * @Assert\NotBlank()
      * @ORM\Column(type="string", length=180, unique=true, nullable=true)
      */
+    #[Assert\Email()]
     private ?string $email;
-
-    /**
-     * @Assert\NotBlank()
-     * @ORM\Column(type="string", length=180, nullable=true)
-     */
-    private ?string $company_name;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -46,13 +43,14 @@ class User implements UserInterface
     private array $roles = [];
 
     /**
-     * @var string The hashed password
+     * @var ?string The hashed password
      * @ORM\Column(type="string", nullable=true)
      */
+    #[Assert\Length(min: 5, groups: ['registration'])]
     private ?string $password;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="employee")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="employees")
      * @ORM\JoinColumn(nullable=true)
      */
     private ?User $chief;
@@ -66,16 +64,19 @@ class User implements UserInterface
      * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    #[Assert\Length(null,3,255)]
     private $first_name;
 
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    #[Assert\Length(null,3,255)]
     private $last_name;
 
     public function __construct() {
         $this->employees = new ArrayCollection();
+        $this->create_at = new DateTime();
     }
 
     public function getId(): int
@@ -103,18 +104,6 @@ class User implements UserInterface
     public function getUsername(): string
     {
         return (string) $this->email;
-    }
-
-    public function getCompanyName() : ?string
-    {
-        return $this->company_name;
-    }
-
-    public function setCompanyName(?string $company_name): self
-    {
-        $this->company_name = $company_name;
-
-        return $this;
     }
 
     public function getCreateAt(): ?DateTime
