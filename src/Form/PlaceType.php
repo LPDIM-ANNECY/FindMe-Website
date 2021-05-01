@@ -6,9 +6,11 @@ use App\Entity\Category;
 use App\Entity\Place;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class PlaceType extends AbstractType
 {
@@ -28,6 +30,9 @@ class PlaceType extends AbstractType
                 'choice_label' => 'name',
                 'expanded' => false,
                 'multiple' => false
+            ])
+            ->add('image', FileType::class, [
+                'required' => false,
             ])
         ;
     }

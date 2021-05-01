@@ -6,9 +6,14 @@ use App\Repository\PlaceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=PlaceRepository::class)
+ * @Vich\Uploadable()
  */
 class Place
 {
@@ -20,8 +25,32 @@ class Place
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
+    private $imageFileName;
+
+    /**
+     * @var File|null
+     * @Vich\UploadableField(mapping="places_image", fileNameProperty="imageFileName")
+     */
+    #[Assert\Image(
+        maxSize: "2M",
+        mimeTypes: ['image/jpeg'],
+        notFoundMessage: "Le fichier n'a pas été trouvé sur le disque",
+        mimeTypesMessage: "Le fichier choisi ne correspond pas à un fichier valide (JPEG)",
+        uploadErrorMessage: "Erreur dans l'upload du fichier"
+    )]
+    private $image;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    #[Assert\Length(
+        min: 3,
+        max: 255,
+    )]
     private $name;
 
     /**
@@ -51,6 +80,7 @@ class Place
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     private $description;
 
@@ -64,6 +94,11 @@ class Place
      * @ORM\ManyToMany(targetEntity=Itinerary::class, mappedBy="places")
      */
     private $itineraries;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $update_at;
 
     public function __construct()
     {
@@ -202,4 +237,56 @@ class Place
 
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getImageFileName(): ?string
+    {
+        return $this->imageFileName;
+    }
+
+    /**
+     * @param string|null $imageFileName
+     * @return Place
+     */
+    public function setImageFileName(?string $imageFileName): Place
+    {
+        $this->imageFileName = $imageFileName;
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImage(): ?File
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param File|null $image
+     * @return Place
+     */
+    public function setImage(?File $image): Place
+    {
+        $this->image = $image;
+        if ($this->image instanceof UploadedFile) {
+            $this->update_at = new \DateTime('now');
+        }
+        return $this;
+    }
+
+    public function getUpdateAt(): ?\DateTimeInterface
+    {
+        return $this->update_at;
+    }
+
+    public function setUpdateAt(\DateTimeInterface $update_at): self
+    {
+        $this->update_at = $update_at;
+
+        return $this;
+    }
+
 }

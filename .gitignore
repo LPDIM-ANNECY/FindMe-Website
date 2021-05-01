@@ -18,3 +18,7 @@
 # custom
 .env
 .idea
+/public/img/places
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###

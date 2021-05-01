@@ -40,8 +40,11 @@
                     <div class="itemDetailValue">{{ place.category }}</div>
                 </div>
             </div>
-            <img class="image"
-                 src="https://www.sportstrategies.com/wp-content/uploads/2018/12/img_logo_blue.jpg" alt=""/>
+            {% if place.imageFileName %}
+                <img src="{{ vich_uploader_asset(place, 'image') | imagine_filter('thumb') }}" alt="" class="image">
+            {% else %}
+                <img src="{{ '/img/img_logo_blue.jpg' | imagine_filter('thumb') }}" alt="" class="image">
+            {% endif %}
         </div>
     </div>
 {% endblock %}
