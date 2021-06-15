@@ -95,11 +95,6 @@ class Place
      */
     private $itineraries;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $update_at;
-
     public function __construct()
     {
         $this->itineraries = new ArrayCollection();
@@ -271,21 +266,6 @@ class Place
     public function setImage(?File $image): Place
     {
         $this->image = $image;
-        if ($this->image instanceof UploadedFile) {
-            $this->update_at = new \DateTime('now');
-        }
-        return $this;
-    }
-
-    public function getUpdateAt(): ?\DateTimeInterface
-    {
-        return $this->update_at;
-    }
-
-    public function setUpdateAt(\DateTimeInterface $update_at): self
-    {
-        $this->update_at = $update_at;
-
         return $this;
     }
 

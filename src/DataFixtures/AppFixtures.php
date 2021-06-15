@@ -30,7 +30,6 @@ class AppFixtures extends Fixture
         $basilique->setLatitude(45.89264634808408);
         $basilique->setLongitude(6.127579211291609);
         $basilique->setRadiusType(3);
-        $basilique->setUpdateAt(new \DateTime('now'));
 
         $amours = new Place();
         $amours->setName('Pont des Amours');
@@ -41,7 +40,6 @@ class AppFixtures extends Fixture
         $amours->setLatitude(45.90021392770459);
         $amours->setLongitude(6.131381025876303);
         $amours->setRadiusType(1);
-        $amours->setUpdateAt(new \DateTime('now'));
 
 
         $noel = new Place();
@@ -53,8 +51,6 @@ class AppFixtures extends Fixture
         $noel->setLatitude(45.89914109273048);
         $noel->setLongitude(6.128102249599104);
         $noel->setRadiusType(3);
-        $noel->setUpdateAt(new \DateTime('now'));
-
 
 
         $manager->persist($bridge);
