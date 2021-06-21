@@ -2,9 +2,108 @@
 
 {% extends 'layout/base.html.twig' %}
 {% block body %}
-    <div class="titleMenu">
-        <div class="title">{{ title }}</div>
+    <div id="modal-gift" class="d-none">
+        <div class="container-modal">
+            <i class="close las la-times la-2x cursor-pointer"></i>
+            <h3 class="mb-4">Message généré</h3>
+            <p class="message-preview-gift"></p>
+        </div>
     </div>
+
+
+    <div class="titleMenu mb-3">
+        <i class="las la-arrow-left" onclick="location='{{ path('index') }}'"></i>
+        <div class="title">{{ title }} à distribuer</div>
+    </div>
+
+    <table class="mx-auto mt-5">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Voir le mail<br /><br />de récompense</th>
+                <th>Envoyer le mail<br /><br />de récompense</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>cuvelliern@iut-acy.univ-smb.fr</td>
+                <td>Nathan</td>
+                <td>Cuvellier</td>
+                <td class="text-center"><i class="see-email las la-eye la-2x cursor-pointer"></i></td>
+                <td class="text-center"><i class="las la-envelope la-2x"></i></td>
+                <td class="d-none message-preview">
+                    Bonjour Nathan cuvellier,<br /><br />
+                    Vous venez de passer le niveau 4 !<br />
+                    <i class="las la-2x la-gift"></i>Venez à l'office du tourisme d'Annecy pour récuperer vos récompenses<i class="las la-2x la-gift"></i>
+                    <br /><br />
+                    <i class="text-muted">Ce message a été généré automatiquement. Merci de ne pas utiliser la fonction répondre à ce mail.</i>
+                </td>
+            </tr>
+            <tr>
+                <td>polletb@iut-acy.univ-smb.fr</td>
+                <td>Baptiste</td>
+                <td>POLLET</td>
+                <td class="text-center"><i class="see-email las la-eye la-2x cursor-pointer"></i></td>
+                <td class="text-center"><i class="las la-envelope la-2x cursor-pointer"></i></td>
+                <td class="d-none message-preview">
+                    Bonjour Baptiste POLLET,<br /><br />
+                    Vous venez de visiter 5 monuments !<br />
+                    <i class="las la-2x la-gift"></i>Venez à l'office du tourisme d'Annecy pour récuperer vos récompenses<i class="las la-2x la-gift"></i>
+                    <br /><br />
+                    <i class="text-muted">Ce message a été généré automatiquement. Merci de ne pas utiliser la fonction répondre à ce mail.</i>
+                </td>
+            </tr>
+            <tr>
+                <td>viardp@iut-acy.univ-smb.fr</td>
+                <td>Loïc</td>
+                <td>Viard</td>
+                <td class="text-center"><i class="see-email las la-eye la-2x cursor-pointer"></i></td>
+                <td class="text-center"><i class="las la-envelope la-2x cursor-pointer"></i></td>
+                <td class="d-none message-preview">
+                    Bonjour Loïc Viard,<br /><br />
+                    Vous venez de finir l'itinéraire "Au bord du lac" !<br />
+                    <i class="las la-2x la-gift"></i>Venez à l'office du tourisme d'Annecy pour récuperer vos récompenses<i class="las la-2x la-gift"></i>
+                    <br /><br />
+                    <i class="text-muted">Ce message a été généré automatiquement. Merci de ne pas utiliser la fonction répondre à ce mail.</i>
+                </td>
+            </tr>
+            <tr>
+                <td>vibertg@iut-acy.univ-smb.fr</td>
+                <td>Guillian</td>
+                <td>Vibert-Vallet</td>
+                <td class="text-center"><i class="see-email las la-eye la-2x cursor-pointer"></i></td>
+                <td class="text-center"><i class="las la-envelope la-2x cursor-pointer"></i></td>
+                <td class="d-none message-preview">
+                    Bonjour Loïc Viard,<br /><br />
+                    Vous venez de finir de franchir le cap des 15 km effectué avec notre application !<br />
+                    <i class="las la-2x la-gift"></i>Venez à l'office du tourisme d'Annecy pour récuperer vos récompenses<i class="las la-2x la-gift"></i>
+                    <br /><br />
+                    <i class="text-muted">Ce message a été généré automatiquement. Merci de ne pas utiliser la fonction répondre à ce mail.</i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}
+
+{% block javascriptsCustom %}
+    <script>
+        document.querySelectorAll('.see-email').forEach(element =>  {
+            element.addEventListener('click', () => {
+                document.querySelector('#modal-gift .message-preview-gift').innerHTML = element.closest('tr').querySelector('.message-preview').innerHTML
+                document.querySelector('#modal-gift').classList.remove('d-none')
+            })
+        })
+
+        document.querySelectorAll('#modal-gift .close').forEach(element =>  {
+            element.addEventListener('click', () => {
+                element.closest('#modal-gift').classList.add('d-none')
+            })
+        })
+    </script>
 {% endblock %}
 
 
